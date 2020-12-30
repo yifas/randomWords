@@ -1,0 +1,8 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    username: root
+    password: #
+    url: jdbc:mysql://106.15.227.173:3306/wordsdb?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver

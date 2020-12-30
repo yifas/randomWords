@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bin.dao.WordsDao">
+  <!--  <select id="findByWords" resultType="com.bin.pojo.EnWords">
+        SELECT * FROM EnWords where word like concat(#{words},'%')
+    </select>-->
+
+    <select id="findByWords" resultType="com.bin.pojo.EnWords">
+        SELECT * FROM EnWords where word = #{words}
+    </select>
+
+    <select id="getRandomWords" resultType="com.bin.pojo.EnWords">
+        SELECT * FROM EnWords where id in
+        <foreach collection="array" open="(" separator="," close=")" item="num">
+            #{num}
+        </foreach>
+    </select>
+</mapper>
