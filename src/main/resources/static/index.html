@@ -2,9 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>RandomWords</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="./plugins/element-ui/lib/theme-chalk/index.css">
+    <script src="./plugins/js/vue.js"></script>
+    <script src="./plugins/js/axios-0.18.0.js"></script>
+    <script src="./plugins/element-ui/lib/index.js"></script>
+
+    <style>
+        .el-header, .el-footer {
+            background-color: #B3C0D1;
+            color: #333;
+            text-align: center;
+            line-height: 60px;
+        }
+        .el-main {
+            background-color: #E9EEF3;
+            color: #333;
+            text-align: center;
+            line-height: 160px;
+        }
+
+    </style>
 </head>
 <body>
-
+<div id="div1">
+    <!--外层容器 内部元素有header垂直排列-->
+    <el-container>
+        <!--头部容器 不在el-container内 占满浏览器-->
+        <el-header>Header</el-header>
+        <!--外层容器 内部元素不含header和footer 水平排列-->
+        <el-container>
+            <el-main>
+                <el-container>
+                    <h1>单词搜索</h1>
+                </el-container>
+                <el-container>
+                    <el-input  style="width: 400px;" placeholder="请输入完整单词" v-model="input" @keyup.enter.native="handleFilter"></el-input>
+                    <el-button @click="findByWords()" class="dalfBut">查询</el-button>
+                </el-container>
+                <el-container>
+                    <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+                        <!-- <el-table-column type="index" align="center" label="序号"></el-table-column> -->
+                        <el-table-column prop="word" label="单词" align="center"></el-table-column>
+                        <el-table-column prop="translation" label="翻译" align="center"></el-table-column>
+                    </el-table>
+                </el-container>
+            </el-main>
+            <el-footer>Footer</el-footer>
+        </el-container>
+    </el-container>
+</div>
 </body>
+
+<script>
+    new Vue({
+        el:"#div1",
+        data:{
+            input:null,
+            dataList:[]
+        },
+        methods:{
+            findByWords(){
+                axios.get("/word?word="+this.input)
+                    .then(resp=>{
+                        this.dataList=resp;
+                    });
+            }
+        }
+    });
+</script>
+
 </html>

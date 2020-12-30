@@ -4,15 +4,13 @@ package com.bin.controller;
 import com.bin.pojo.EnWords;
 import com.bin.service.WordsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/words")
+@CrossOrigin
 public class EnWordsController {
 
     @Autowired
